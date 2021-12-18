@@ -1,9 +1,9 @@
 package com.cota.after_corona_api.domain.account.service;
 
-import com.cota.after_corona_api.domain.account.data.dto.RawAccountDto;
+import com.cota.after_corona_api.domain.account.data.dto.AccountDto;
 
 public interface RegisterService {
-    RawAccountDto decodeToken(String token);
+    AccountDto decodeToken(String token);
 
     String encodePassword(String password);
 }

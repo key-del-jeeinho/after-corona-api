@@ -5,10 +5,12 @@ import com.cota.after_corona_api.domain.account.data.request.*;
 import com.cota.after_corona_api.domain.account.data.response.*;
 import com.cota.after_corona_api.domain.account.service.AccountService;
 import com.cota.after_corona_api.domain.account.service.RegisterService;
+import com.cota.after_corona_api.global.annotation.WithJwtAdvice;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@WithJwtAdvice
 @RestController
 @RequestMapping("/api/v1/account-api")
 @RequiredArgsConstructor
@@ -18,12 +20,7 @@ public class AccountController {
 
     @PostMapping("/account")
     public ResponseEntity<CreateAccountResponse> addAccount(@RequestBody CreateAccountRequest request) {
-        RawAccountDto rawAccount = registerService.decodeToken(request.token());
-        String encodedPassword = registerService.encodePassword(rawAccount.rawPassword());
-
-        AccountDto account = accountService.createAccount(
-                new AccountDto(rawAccount.id(), rawAccount.name(), encodedPassword, rawAccount.phoneNumber())
-        );
+        AccountDto account = registerService.decodeToken(request.token());
 
         CreateAccountResponse res = new CreateAccountResponse(account.id(), account.name(), account.phoneNumber());
         return ResponseEntity.ok(res);

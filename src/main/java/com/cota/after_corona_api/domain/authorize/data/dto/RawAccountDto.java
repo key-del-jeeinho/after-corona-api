@@ -1,4 +1,4 @@
-package com.cota.after_corona_api.domain.account.data.dto;
+package com.cota.after_corona_api.domain.authorize.data.dto;
 
 public record RawAccountDto(
         String id,
