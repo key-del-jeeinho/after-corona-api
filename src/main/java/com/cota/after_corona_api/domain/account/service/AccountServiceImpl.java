@@ -1,9 +1,9 @@
 package com.cota.after_corona_api.domain.account.service;
 
-import com.cota.after_corona_api.domain.account.data.dto.AccountDto;
-import com.cota.after_corona_api.domain.account.data.entity.AccountEntity;
-import com.cota.after_corona_api.domain.account.policy.AccountPolicy;
-import com.cota.after_corona_api.domain.account.repository.AccountRepository;
+import com.cota.after_corona_api.domain.account.api.data.dto.AccountDto;
+import com.cota.after_corona_api.domain.account.api.data.entity.AccountEntity;
+import com.cota.after_corona_api.domain.account.api.policy.AccountPolicy;
+import com.cota.after_corona_api.domain.account.api.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

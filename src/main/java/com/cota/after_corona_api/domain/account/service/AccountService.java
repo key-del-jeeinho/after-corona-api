@@ -1,6 +1,6 @@
 package com.cota.after_corona_api.domain.account.service;
 
-import com.cota.after_corona_api.domain.account.data.dto.AccountDto;
+import com.cota.after_corona_api.domain.account.api.data.dto.AccountDto;
 
 public interface AccountService {
     AccountDto createAccount(AccountDto account);
