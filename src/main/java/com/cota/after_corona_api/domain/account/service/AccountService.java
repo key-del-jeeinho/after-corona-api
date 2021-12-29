@@ -10,4 +10,6 @@ public interface AccountService {
     AccountDto updateAccount(String id, AccountDto account);
 
     void deleteAccount(String id);
+
+    boolean isExistAccount(String email);
 }

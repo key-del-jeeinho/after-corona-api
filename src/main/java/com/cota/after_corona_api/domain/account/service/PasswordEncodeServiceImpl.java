@@ -6,12 +6,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class RegisterServiceImpl implements PasswordEncodeService {
+public class PasswordEncodeServiceImpl implements PasswordEncodeService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public String encodePassword(String password) {
         return passwordEncoder.encode(password);
+    }
+
+    @Override
+    public boolean match(String rawPassword, String encodedPassword) {
+        return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 
 }

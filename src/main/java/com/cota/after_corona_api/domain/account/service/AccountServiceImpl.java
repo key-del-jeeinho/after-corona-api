@@ -4,6 +4,7 @@ import com.cota.after_corona_api.domain.account.api.data.dto.AccountDto;
 import com.cota.after_corona_api.domain.account.api.data.entity.AccountEntity;
 import com.cota.after_corona_api.domain.account.api.policy.AccountPolicy;
 import com.cota.after_corona_api.domain.account.api.repository.AccountRepository;
+import com.cota.after_corona_api.domain.account.exception.AccountNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountDto getAccount(String id) {
+        if(!accountRepository.existsById(id)) throw new AccountNotFoundException(id);
+
         AccountEntity data = accountRepository.getById(id);
         return data.toDto();
     }
@@ -44,5 +47,10 @@ public class AccountServiceImpl implements AccountService {
         accountPolicy.validateDeletePolicy(id);
 
         accountRepository.deleteById(id);
+    }
+
+    @Override
+    public boolean isExistAccount(String phoneNumber) {
+        return accountRepository.existsByPhoneNumber(phoneNumber);
     }
 }

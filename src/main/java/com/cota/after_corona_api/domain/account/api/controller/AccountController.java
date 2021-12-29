@@ -7,8 +7,12 @@ import com.cota.after_corona_api.domain.account.service.AccountService;
 import com.cota.after_corona_api.domain.account.service.PasswordEncodeService;
 import com.cota.after_corona_api.global.annotation.WithJwtAdvice;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.websocket.server.PathParam;
+import java.util.Random;
 
 @WithJwtAdvice
 @RestController
@@ -18,6 +22,14 @@ public class AccountController {
     private final AccountService accountService;
     private final PasswordEncodeService passwordEncodeService;
 
+    @GetMapping("/account/phone-number/{phone-number}")
+    public ResponseEntity<?> isExistAccount(@PathVariable(name = "phone-number") String phoneNumber) {
+        boolean exist = accountService.isExistAccount(phoneNumber);
+        String[] people = new String[]{"J.K 롤링", "알베르트 아인슈타인", "엠마 왓슨", "아리아나 그란데", "홍길동", "똥철이", "모차르트", "당신의 그녀(혹시 없나요?)"};
+        String person = people[new Random().nextInt(people.length)];
+        if(exist) return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        else return ResponseEntity.ok(person + " 도 감탄할 독창적인 아이디군요!");
+    }
 
     @GetMapping("/account/{id}")
     public ResponseEntity<GetAccountResponse> getAccount(@PathVariable String id) {
