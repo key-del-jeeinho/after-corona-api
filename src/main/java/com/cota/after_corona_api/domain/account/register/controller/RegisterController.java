@@ -17,6 +17,7 @@ public class RegisterController {
     public ResponseEntity<?> sendAuthorizeLink(@RequestBody SendAuthorizeLinkRequest request) {
         RawAccountDto rawAccountDto = new RawAccountDto(request.id(), request.name(), request.rawPassword(), request.phoneNumber());
         String link = authorizeService.generateAuthorizeLink(rawAccountDto, request.linkDuration(), request.callbackUrl());
+        System.out.println(link);
         //authorizeService.sendAuthorizeLink(link, rawAccountDto.phoneNumber());
 
         return ResponseEntity.ok(link);
